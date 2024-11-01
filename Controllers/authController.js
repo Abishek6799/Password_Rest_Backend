@@ -69,7 +69,7 @@ export const forgotPassword = async (req, res) => {
       subject: "Password Reset Link",
       text: `You are receiving this because you have requested the reset of the password for your account 
       Please click the following link or paste it into your browser to complete the process
-      http://localhost:5173/reset-password/${user._id}/${resetToken}`,
+      https://graceful-capybara-c86bd7.netlify.app/reset-password/${user._id}/${resetToken}`,
     };
     transporter.sendMail(mailOptions, function (error) {
       if (error) {
@@ -96,7 +96,7 @@ export const resetPassword = async (req, res) => {
         return res.status(400).json({ message: "Invalid or expired token" });
       }
       const hash = await bcrypt.hash(password, 10);
-      
+
       user.password = hash;
       user.resetToken = undefined;
       user.resetTokenExpiry = undefined;
